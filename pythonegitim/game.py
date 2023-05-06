@@ -17,19 +17,29 @@ def ates(ekran, kordinat, dusman):
         #pygame.draw.rect(ekran, mavi, pygame.Rect(kordinat+199,250-i,2,10))
         ekran.fill(mavi)
         for j in dusman:
-            pygame.draw.rect(ekran, "red", pygame.Rect(dusman[j][0], dusman[j][1],20,20))
+            if dusman[j][1] == 3:
+                pygame.draw.rect(ekran, "green", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
+            elif dusman[j][1] == 2:
+                pygame.draw.rect(ekran, "yellow", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
+            elif dusman[j][1] == 1:
+                pygame.draw.rect(ekran, "red", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
+                
         for j in dusman:
-            if dusman[j][0] < kordinat + 199 <= dusman[j][0] + 20  and dusman[j][1] < 250-i < dusman[j][1] + 20:
-                del dusman[j]
-                return dusman
+            if dusman[j][0][0] < kordinat + 199 <= dusman[j][0][0] + 20  and dusman[j][0][1] < 250-i < dusman[j][0][1] + 20:
+                if dusman[j][1]==1:
+                    del dusman[j]
+                    return dusman
+                else:
+                    dusman[j][1] -= 1
+                    return dusman
         pygame.draw.polygon(ekran, "white", [[200 + hareket, 260], 
                                              [190 + hareket, 275], 
                                              [210 + hareket, 275]])
     return dusman
 
-dusman = {"birinci": (30,30), "ikinci" : (70,50), 
-          "ucuncu" : (80,90), "dorduncu" : (120,60), 
-          "besinci" : (160,30)}        
+dusman = {"birinci": [(30,30), 3], "ikinci" : [(70,50), 3], 
+          "ucuncu" : [(80,90), 3], "dorduncu" : [(120,60), 3], 
+          "besinci" : [(160,30), 3]}        
 while True:
     pygame.display.update() #Ekranın güncellenmesi sağlanıyor
     ekran.fill(mavi)#Ekran rengi belirleniyor
@@ -50,7 +60,12 @@ while True:
         if hareket < 190:
             hareket += 0.01
     for j in dusman:
-        pygame.draw.rect(ekran, "red", pygame.Rect(dusman[j][0], dusman[j][1],20,20))
+        if dusman[j][1] == 3:
+            pygame.draw.rect(ekran, "green", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
+        elif dusman[j][1] == 2:
+            pygame.draw.rect(ekran, "yellow", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
+        elif dusman[j][1] == 1:
+            pygame.draw.rect(ekran, "red", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
     pygame.draw.polygon(ekran, "white", [[200 + hareket, 260], 
                                          [190 + hareket, 275], 
                                          [210 + hareket, 275]])
