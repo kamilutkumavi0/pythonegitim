@@ -37,9 +37,9 @@ def ates(ekran, kordinat, dusman):
                                              [210 + hareket, 275]])
     return dusman
 
-dusman = {"birinci": [(30,30), 3], "ikinci" : [(70,50), 3], 
-          "ucuncu" : [(80,90), 3], "dorduncu" : [(120,60), 3], 
-          "besinci" : [(160,30), 3]}        
+dusman = {"birinci": [[30,309], 3], "ikinci" : [[70,50], 3], 
+          "ucuncu" : [[80,90], 3], "dorduncu" : [[120,60], 3], 
+          "besinci" : [[160,30], 3]}        
 while True:
     pygame.display.update() #Ekranın güncellenmesi sağlanıyor
     ekran.fill(mavi)#Ekran rengi belirleniyor
@@ -66,6 +66,7 @@ while True:
             pygame.draw.rect(ekran, "yellow", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
         elif dusman[j][1] == 1:
             pygame.draw.rect(ekran, "red", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
+        dusman[j][0][1] += 0.001
     pygame.draw.polygon(ekran, "white", [[200 + hareket, 260], 
                                          [190 + hareket, 275], 
                                          [210 + hareket, 275]])
