@@ -1,5 +1,6 @@
 import pygame
 import time
+import random
 
 #Ekran Boyutlandırma
 ekranYukseklik = 300 #Ekran yüksekliği belirlendi
@@ -36,10 +37,16 @@ def ates(ekran, kordinat, dusman):
                                              [190 + hareket, 275], 
                                              [210 + hareket, 275]])
     return dusman
-
-dusman = {"birinci": [[30,30], 3], "ikinci" : [[70,50], 3], 
-          "ucuncu" : [[80,90], 3], "dorduncu" : [[120,60], 3], 
-          "besinci" : [[160,30], 3]}        
+def dusman_olusturucu(level = 1):
+    dusman = {}
+    for i in range(level + 7):
+        dusman[str(i)] = [[random.randint(0, 19)*20, -1*random.randint(0, 19)*20], 3]
+    return dusman
+        
+# dusman = {"birinci": [[30,30], 3], "ikinci" : [[70,50], 3], 
+#           "ucuncu" : [[80,90], 3], "dorduncu" : [[120,60], 3], 
+#           "besinci" : [[160,30], 3]}  
+dusman = dusman_olusturucu()      
 while True:
     pygame.display.update() #Ekranın güncellenmesi sağlanıyor
     ekran.fill(mavi)#Ekran rengi belirleniyor
@@ -67,11 +74,11 @@ while True:
             pygame.draw.rect(ekran, "yellow", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
         elif dusman[j][1] == 1:
             pygame.draw.rect(ekran, "red", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
-        dusman[j][0][1] += 0.001
+        dusman[j][0][1] += 0.01
         if dusman[j][0][1] >= 280:
             kapat = True
     pygame.draw.polygon(ekran, "white", [[200 + hareket, 260], 
                                          [190 + hareket, 275], 
                                          [210 + hareket, 275]])
     
-    
+      
