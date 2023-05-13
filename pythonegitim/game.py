@@ -43,9 +43,8 @@ def dusman_olusturucu(level = 1):
         dusman[str(i)] = [[random.randint(0, 19)*20, -1*random.randint(0, 19)*20], 3]
     return dusman
         
-# dusman = {"birinci": [[30,30], 3], "ikinci" : [[70,50], 3], 
-#           "ucuncu" : [[80,90], 3], "dorduncu" : [[120,60], 3], 
-#           "besinci" : [[160,30], 3]}  
+ 
+level = 0
 dusman = dusman_olusturucu()      
 while True:
     pygame.display.update() #Ekranın güncellenmesi sağlanıyor
@@ -63,10 +62,10 @@ while True:
     keys=pygame.key.get_pressed()
     if keys[pygame.K_a]:
         if hareket > -190:
-            hareket -= 0.01
+            hareket -= 0.1
     if keys[pygame.K_d]:
         if hareket < 190:
-            hareket += 0.01
+            hareket += 0.05
     for j in dusman:
         if dusman[j][1] == 3:
             pygame.draw.rect(ekran, "green", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
@@ -77,8 +76,11 @@ while True:
         dusman[j][0][1] += 0.01
         if dusman[j][0][1] >= 280:
             kapat = True
+    if dusman == {}:
+        level += 1
+        dusman = dusman_olusturucu(level) 
     pygame.draw.polygon(ekran, "white", [[200 + hareket, 260], 
                                          [190 + hareket, 275], 
                                          [210 + hareket, 275]])
     
-      
+       
