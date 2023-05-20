@@ -25,7 +25,11 @@ def ates(ekran, kordinat, dusman, kill_counter):
                 pygame.draw.rect(ekran, "yellow", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
             elif dusman[j][1] == 1:
                 pygame.draw.rect(ekran, "red", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
-                
+        text = font.render("Kill: " + str(kill_counter), True, "black")
+        textRect = text.get_rect()
+        textRect.left=0
+        textRect.top=0
+        ekran.blit(text,textRect)    
         for j in dusman:
             if dusman[j][0][0] < kordinat + 199 <= dusman[j][0][0] + 20  and dusman[j][0][1] < 250-i < dusman[j][0][1] + 20:
                 if dusman[j][1]==1:
@@ -78,7 +82,7 @@ while True:
             pygame.draw.rect(ekran, "yellow", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
         elif dusman[j][1] == 1:
             pygame.draw.rect(ekran, "red", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
-        dusman[j][0][1] += 0.007 
+        dusman[j][0][1] += 0.007
         if dusman[j][0][1] >= 280:
             kapat = True
     if dusman == {}:
