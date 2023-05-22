@@ -49,7 +49,15 @@ def dusman_olusturucu(level):
         dusman[str(i)] = [[random.randint(0, 19)*20, -1*random.randint(0, 19)*20], 3]
         
     return dusman
-        
+
+def bitis(kill_counter):
+    font = pygame.font.Font('freesansbold.ttf', 35) 
+    ekran.fill(mavi)
+    text = font.render('Öldürme: '+ str(kill_counter), True, "black") 
+    textRect = text.get_rect()
+    textRect.center = (200,150)
+    ekran.blit(text, textRect)
+    pygame.display.update()
  
 level = 1
 dusman = dusman_olusturucu(level) 
@@ -66,15 +74,18 @@ while True:
             if olay.key == pygame.K_SPACE:
                 dusman, kill_counter = ates(ekran, hareket, dusman, kill_counter)
     if kapat:
+        
+        bitis(kill_counter)
+        time.sleep(1)
         pygame.quit()
         break
     keys=pygame.key.get_pressed()
     if keys[pygame.K_a]:
         if hareket > -190:
-            hareket -= 0.05
+            hareket -= 0.04
     if keys[pygame.K_d]:
         if hareket < 190:
-            hareket += 0.05
+            hareket += 0.04
     for j in dusman:
         if dusman[j][1] == 3:
             pygame.draw.rect(ekran, "green", pygame.Rect(dusman[j][0][0], dusman[j][0][1],20,20))
